@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class StringSchemaTest {
+public final class StringSchemaTest {
     private Validator v;
     private StringSchema schema;
     @BeforeEach
@@ -48,31 +48,34 @@ public class StringSchemaTest {
 
     @Test
     public void stringSchemaTest5() {
+        final int min = 27;
         boolean actual = v.string()
                 .required()
                 .contains("London")
                 .contains("is the")
-                .minLength(27)
+                .minLength(min)
                 .isValid("London is the capital of...");
         assertTrue(actual);
     }
 
     @Test
     public void stringSchemaTest6() {
+        final int min = 27;
         boolean actual = v.string()
                 .required()
                 .contains("Paris")
                 .contains("is the")
-                .minLength(27)
+                .minLength(min)
                 .isValid("London is the capital of...");
         assertFalse(actual);
     }
 
     @Test
     public void stringSchemaTest7() {
+        final int min = 28;
         boolean actual = v.string()
                 .required()
-                .minLength(28)
+                .minLength(min)
                 .isValid("London is the capital of...");
         assertFalse(actual);
     }
