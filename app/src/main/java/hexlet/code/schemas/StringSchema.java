@@ -10,18 +10,20 @@ public final class StringSchema extends BaseSchema {
 
     @Override
     public boolean isValid(Object string) {
+        boolean result;
 
         if (string == null) {
-            return this.status;
+            result = this.status;
         } else if (!(string instanceof String)) {
-            return false;
+            result = false;
         } else if (((String) string).length() < 1) {
-            return this.status;
+            result = this.status;
         } else if (((String) string).length() < this.minLength) {
-            return false;
+            result = false;
         } else {
-            return listOfContains.size() == 0 || isContains(((String) string));
+            result = listOfContains.size() == 0 || isContains(((String) string));
         }
+        return result;
     }
 
     public boolean isContains(String str) {

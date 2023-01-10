@@ -8,17 +8,19 @@ public final class NumberSchema extends BaseSchema {
 
     @Override
     public boolean isValid(Object number) {
+        boolean result;
         if (number == null) {
-            return this.status;
+            result = this.status;
         } else if (!(number instanceof Integer)) {
-            return false;
+            result = false;
         } else if (this.min != null && this.max != null) {
-            return min <= ((Integer) number) & max >= ((Integer) number);
+            result = min <= ((Integer) number) & max >= ((Integer) number);
         } else if (((Integer) number) <= 0) {
-            return positive;
+            result = positive;
         } else {
-            return true;
+            result = true;
         }
+        return result;
     }
 
     public NumberSchema required() {

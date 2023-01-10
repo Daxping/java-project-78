@@ -1,5 +1,6 @@
 package hexlet.code;
 
+import hexlet.code.schemas.BaseSchema;
 import hexlet.code.schemas.MapSchema;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,6 +13,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public final class MapSchemaTest {
     private Validator v;
     private MapSchema schema;
+
+    private final int a = 100;
+    private final int b = -5;
 
     @BeforeEach
     public void beforeEach() {
@@ -73,6 +77,70 @@ public final class MapSchemaTest {
                 .sizeof(2)
                 .isValid(data);
         assertTrue(actual);
+    }
+
+    @Test
+    public void mapSchemaTest7() {
+        Map<String, BaseSchema> schemas = new HashMap<>();
+        schemas.put("name", v.string().required());
+        schemas.put("age", v.number().positive());
+
+        Map<String, Object> human1 = new HashMap<>();
+        human1.put("name", "Kolya");
+        human1.put("age", a);
+        boolean actual = schema
+                .required()
+                .shape(schemas)
+                .isValid(human1);
+        assertTrue(actual);
+    }
+
+    @Test
+    public void mapSchemaTest8() {
+        Map<String, BaseSchema> schemas = new HashMap<>();
+        schemas.put("name", v.string().required());
+        schemas.put("age", v.number().positive());
+
+        Map<String, Object> human2 = new HashMap<>();
+        human2.put("name", "Maya");
+        human2.put("age", null);
+        boolean actual = schema
+                .required()
+                .shape(schemas)
+                .isValid(human2);
+        assertTrue(actual);
+    }
+
+    @Test
+    public void mapSchemaTest9() {
+        Map<String, BaseSchema> schemas = new HashMap<>();
+        schemas.put("name", v.string().required());
+        schemas.put("age", v.number().positive());
+
+        Map<String, Object> human3 = new HashMap<>();
+        human3.put("name", "");
+        human3.put("age", null);
+        boolean actual = schema
+                .required()
+                .shape(schemas)
+                .isValid(human3);
+        assertFalse(actual);
+    }
+
+    @Test
+    public void mapSchemaTest10() {
+        Map<String, BaseSchema> schemas = new HashMap<>();
+        schemas.put("name", v.string().required());
+        schemas.put("age", v.number().positive());
+
+        Map<String, Object> human4 = new HashMap<>();
+        human4.put("name", "Valya");
+        human4.put("age", b);
+        boolean actual = schema
+                .required()
+                .shape(schemas)
+                .isValid(human4);
+        assertFalse(actual);
     }
 
 }
