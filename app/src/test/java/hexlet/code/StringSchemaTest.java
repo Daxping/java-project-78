@@ -12,13 +12,13 @@ public final class StringSchemaTest {
     private StringSchema schema;
     @BeforeEach
     public void beforeEach() {
-        v = new Validator();
-        schema = v.string();
+        this.v = new Validator();
+        this.schema = v.string();
     }
 
     @Test
     public void stringSchemaTest1() {
-        boolean actual = v.string()
+        boolean actual = schema
                 .required()
                 .isValid(null);
         assertFalse(actual);

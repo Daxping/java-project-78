@@ -3,17 +3,13 @@ package hexlet.code.schemas;
 import java.util.ArrayList;
 import java.util.List;
 
-public final class StringSchema {
+public final class StringSchema extends BaseSchema {
     private boolean status = true;
     private int minLength = 0;
     private List<String> listOfContains = new ArrayList<>();
 
+    @Override
     public boolean isValid(Object string) {
-
-        if (string instanceof String) {
-            String str = (String) string;
-        }
-
 
         if (string == null) {
             return this.status;
