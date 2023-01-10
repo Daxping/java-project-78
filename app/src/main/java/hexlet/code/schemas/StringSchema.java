@@ -11,13 +11,10 @@ public final class StringSchema extends BaseSchema {
     @Override
     public boolean isValid(Object string) {
         boolean result;
-
-        if (string == null) {
+        if (string == null || ((String) string).length() < 1) {
             result = this.status;
         } else if (!(string instanceof String)) {
             result = false;
-        } else if (((String) string).length() < 1) {
-            result = this.status;
         } else if (((String) string).length() < this.minLength) {
             result = false;
         } else {

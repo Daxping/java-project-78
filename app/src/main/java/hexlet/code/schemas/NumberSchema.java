@@ -8,7 +8,7 @@ public final class NumberSchema extends BaseSchema {
 
     @Override
     public boolean isValid(Object number) {
-        boolean result;
+        boolean result = true;
         if (number == null) {
             result = this.status;
         } else if (!(number instanceof Integer)) {
@@ -17,8 +17,6 @@ public final class NumberSchema extends BaseSchema {
             result = min <= ((Integer) number) & max >= ((Integer) number);
         } else if (((Integer) number) <= 0) {
             result = positive;
-        } else {
-            result = true;
         }
         return result;
     }
