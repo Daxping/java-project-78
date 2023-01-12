@@ -9,15 +9,15 @@ public final class MapSchema extends BaseSchema {
     private Map<String, BaseSchema> shapeSchema;
     @Override
     public boolean isValid(Object map) {
-        boolean result;
+        boolean result = false;
         if (map == null) {
             result = this.status;
         } else if (!(map instanceof HashMap<?, ?>)) {
             result = false;
-        } else if (sizeOfMap != null) {
-            result = ((HashMap<?, ?>) map).size() == sizeOfMap;
-        } else {
+        } else if (sizeOfMap == null) {
             result = isShapeValid(map);
+        } else {
+            result = isShapeValid(map) && ((HashMap<?, ?>) map).size() == sizeOfMap;
         }
         return result;
     }
@@ -37,14 +37,13 @@ public final class MapSchema extends BaseSchema {
     public boolean isShapeValid(Object map) {
         if (shapeSchema == null) {
             return true;
-        }
-        for (String key : shapeSchema.keySet()) {
-            if (shapeSchema
-                    .get(key)
-                    .isValid(((Map<?, ?>) map).get(key))) {
-                continue;
-            } else {
-                return false;
+        } else {
+            for (String key : shapeSchema.keySet()) {
+                if (!shapeSchema
+                        .get(key)
+                        .isValid(((Map<?, ?>) map).get(key))) {
+                    return false;
+                }
             }
         }
         return true;

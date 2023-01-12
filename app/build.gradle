@@ -1,6 +1,5 @@
 plugins {
     id 'java'
-    id 'application'
     id 'checkstyle'
     id 'com.adarshr.test-logger' version '3.2.0'
     id 'jacoco'
@@ -52,11 +51,6 @@ jacocoTestReport {
         csv.required = true
         html.outputLocation = layout.buildDirectory.dir('jacocoHtml')
     }
-}
-
-application {
-    mainClass = 'hexlet.code.App'
-
 }
 
 compileJava {

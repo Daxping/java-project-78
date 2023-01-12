@@ -89,7 +89,6 @@ public final class MapSchemaTest {
         human1.put("name", "Kolya");
         human1.put("age", a);
         boolean actual = schema
-                .required()
                 .shape(schemas)
                 .isValid(human1);
         assertTrue(actual);
@@ -105,7 +104,6 @@ public final class MapSchemaTest {
         human2.put("name", "Maya");
         human2.put("age", null);
         boolean actual = schema
-                .required()
                 .shape(schemas)
                 .isValid(human2);
         assertTrue(actual);
@@ -114,17 +112,20 @@ public final class MapSchemaTest {
     @Test
     public void mapSchemaTest9() {
         Map<String, BaseSchema> schemas = new HashMap<>();
-        schemas.put("name", v.string().required());
+        schemas.put("name", v.string().required().contains("ya"));
         schemas.put("age", v.number().positive());
+        schema
+                .shape(schemas);
 
-        Map<String, Object> human3 = new HashMap<>();
-        human3.put("name", "");
-        human3.put("age", null);
-        boolean actual = schema
-                .required()
-                .shape(schemas)
-                .isValid(human3);
-        assertFalse(actual);
+        Map<String, Object> actual3 = new HashMap<>();
+        actual3.put("name", "Maya");
+        actual3.put("age", null);
+        assertTrue(schema.isValid(actual3));
+
+        Map<String, Object> actual4 = new HashMap<>();
+        actual4.put("name", "");
+        actual4.put("age", null);
+        assertFalse(schema.isValid(actual4));
     }
 
     @Test
@@ -137,10 +138,8 @@ public final class MapSchemaTest {
         human4.put("name", "Valya");
         human4.put("age", b);
         boolean actual = schema
-                .required()
                 .shape(schemas)
                 .isValid(human4);
         assertFalse(actual);
     }
-
 }
