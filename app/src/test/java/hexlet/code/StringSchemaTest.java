@@ -36,6 +36,10 @@ public final class StringSchemaTest {
         boolean actual = v.string()
                 .isValid("");
         assertTrue(actual);
+
+        boolean actual1 = v.string()
+                .isValid(null);
+        assertTrue(actual1);
     }
 
     @Test
@@ -44,6 +48,11 @@ public final class StringSchemaTest {
                 .required()
                 .isValid("");
         assertFalse(actual);
+
+        boolean actual1 = v.string()
+                .required()
+                .isValid(null);
+        assertFalse(actual1);
     }
 
     @Test
