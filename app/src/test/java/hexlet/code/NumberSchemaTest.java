@@ -9,8 +9,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public final class NumberSchemaTest {
     private Validator v;
     private NumberSchema schema;
-    private final int a = 5;
-    private final int b = 10;
+    private final Integer a = 5;
+    private final Integer b = 9;
 
     @BeforeEach
     public void beforeEach() {

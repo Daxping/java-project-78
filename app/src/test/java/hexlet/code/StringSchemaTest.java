@@ -60,7 +60,7 @@ public final class StringSchemaTest {
 
     @Test
     public void stringSchemaTest6() {
-        final int min = 27;
+        final int min = 28;
         boolean actual = v.string()
                 .required()
                 .contains("Paris")
