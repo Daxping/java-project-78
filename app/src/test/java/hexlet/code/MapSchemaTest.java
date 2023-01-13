@@ -62,7 +62,7 @@ public final class MapSchemaTest {
         data.put("key1", "value1");
         boolean actual = schema
                 .required()
-                .sizeOf(2)
+                .sizeof(2)
                 .isValid(data);
         assertFalse(actual);
     }
@@ -74,7 +74,7 @@ public final class MapSchemaTest {
         data.put("key2", "value2");
         boolean actual = schema
                 .required()
-                .sizeOf(2)
+                .sizeof(2)
                 .isValid(data);
         assertTrue(actual);
     }
