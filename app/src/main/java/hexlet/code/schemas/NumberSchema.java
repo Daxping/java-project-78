@@ -19,7 +19,7 @@ public final class NumberSchema extends BaseSchema {
 
     public NumberSchema positive() {
         if (!reqStatus) {
-            addCheck("positive", value -> value == null || ((int) value) > 0);
+            addCheck("positive", value -> value == null || value instanceof Integer && ((int) value) > 0);
         } else {
             addCheck("positive", value -> ((int) value) > 0);
         }
